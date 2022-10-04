@@ -120,6 +120,10 @@ func execute_k6_benchmark(terminusdb_name string, config BenchmarkConfig) error 
 }
 
 func main() {
+	if len(os.Args) < 3 {
+		fmt.Printf("Usage %s [commit_id] [benchmark_type]\n", os.Args[0])
+		os.Exit(1)
+	}
 	commit_hash := os.Args[1]
 	benchmark_type := os.Args[2]
 	terminusdb_name := "terminusdb_" + commit_hash

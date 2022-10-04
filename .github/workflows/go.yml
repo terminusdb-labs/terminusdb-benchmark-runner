@@ -20,3 +20,8 @@ jobs:
 
     - name: Build
       run: go build -v ./benchmark.go
+
+    - uses: actions/upload-artifact@v3
+      with:
+        name: terminusdb-benchmark-runner-x86_64
+        path: benchmark

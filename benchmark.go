@@ -84,8 +84,7 @@ func execute_lego_benchmark(terminusdb_name string, config BenchmarkConfig) {
 	_, _ = exec.Command("docker", "exec", terminusdb_name, "bash", "-c", "./terminusdb doc insert admin/lego -f -g schema < /app/demo_data/schema.json").Output()
 	fmt.Println("Schema inserted")
 	timejson_output := config.BenchmarkFolder + "/lego_" + terminusdb_name + ".json"
-	stdout, stderr := exec.Command("timejson", timejson_output, "docker", "exec", terminusdb_name, "bash", "-c", "./terminusdb doc insert admin/lego < /app/demo_data/objs.json").Output()
-	fmt.Println(string(stdout))
+	_, stderr := exec.Command("timejson", timejson_output, "docker", "exec", terminusdb_name, "bash", "-c", "./terminusdb doc insert admin/lego < /app/demo_data/objs.json").Output()
 	fmt.Println(stderr)
 	fmt.Println("Timejson finished")
 	stop_terminusdb_docker(terminusdb_name)

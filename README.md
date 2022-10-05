@@ -10,6 +10,7 @@ stdout, but the goal is to run other benchmarks as well.
 - git
 - Docker (with buildx!)
 - [timejson](https://github.com/terminusdb-labs/time-json/)
+- nodejs
 
 ## Compiling
 

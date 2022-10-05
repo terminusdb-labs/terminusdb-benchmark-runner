@@ -21,6 +21,6 @@ stdout, but the goal is to run other benchmarks as well.
 and place it in the lego Demo folder of your choice. Copy the `schema.json` to this directory too. The script can be found in the `demo_data` folder of the [terminus-cms repo](https://github.com/terminusdb-labs/terminus-cms).
 2. Copy config.sample.json to `~/.tdb_benchmark_config.json` and edit the sample values to the right values.
 
-`./benchmark [git_commit_hash] [benchmark_type]` in which benchmark type can be `lego`, `k6` or `all`.
+`./benchmark [git_commit_hash] [benchmark_type]` in which benchmark type can be `lego`, `k6`, `js` or `all`.
 
 If you are not part of the `docker` user group, run the command as a user who can (root, if you feel unsafe). Your home dir will be /root, keep this in mind when setting up the config file.

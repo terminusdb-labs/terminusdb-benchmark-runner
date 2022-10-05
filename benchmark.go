@@ -75,6 +75,20 @@ func stop_terminusdb_docker(terminusdb_name string) bool {
 	return true
 }
 
+func execute_js_benchmark(terminusdb_name string, terminusdb_dir string, config BenchmarkConfig) {
+	fmt.Println("[JS BENCHMARK]")
+	run_terminusdb_docker(terminusdb_name, config.LegoDemoFolder)
+	test_dir := fmt.Sprintf("%s/tests", terminusdb_dir)
+	npm_ci_command := exec.Command("npm", "ci")
+	npm_ci_command.Dir = test_dir
+	_, _ = npm_ci_command.Output()
+	npm_bench_command := exec.Command("node", "bench.js", "--json")
+	npm_bench_command.Dir = test_dir
+	stdout, _ := npm_bench_command.Output()
+	ioutil.WriteFile(fmt.Sprintf("%s/js_benchmark_%s.json", config.BenchmarkFolder, terminusdb_name), stdout, 0644)
+	stop_terminusdb_docker(terminusdb_name)
+}
+
 func execute_lego_benchmark(terminusdb_name string, config BenchmarkConfig) {
 	fmt.Println("[LEGO BENCHMARK]")
 	run_terminusdb_docker(terminusdb_name, config.LegoDemoFolder)
@@ -144,7 +158,10 @@ func main() {
 		execute_k6_benchmark(terminusdb_name, config)
 	case "lego":
 		execute_lego_benchmark(terminusdb_name, config)
+	case "js":
+		execute_js_benchmark(terminusdb_name, terminusdb_dir, config)
 	default:
+		execute_js_benchmark(terminusdb_name, terminusdb_dir, config)
 		execute_k6_benchmark(terminusdb_name, config)
 		execute_lego_benchmark(terminusdb_name, config)
 	}

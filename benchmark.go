@@ -12,7 +12,7 @@ import (
 )
 
 type BenchmarkConfig struct {
-	LegoDemoFolder string `json:"lego_demo_folder"`
+	LegoDemoFolder  string `json:"lego_demo_folder"`
 	BenchmarkFolder string `json:"benchmark_output_folder"`
 }
 
@@ -54,7 +54,7 @@ func clone_and_build_terminusdb(commit_hash string, terminusdb_name string, term
 func run_terminusdb_docker(terminusdb_name string, demo_data_folder string) {
 	// Run Docker Run
 	stdout, err := exec.Command("docker", "run", "--rm", "--detach",
-		"-v", demo_data_folder + ":/app/demo_data",
+		"-v", demo_data_folder+":/app/demo_data",
 		"--name", terminusdb_name, "-p", "6363:6363", terminusdb_name).Output()
 	if err != nil {
 		fmt.Println(string(stdout))

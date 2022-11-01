@@ -66,7 +66,7 @@ func run_terminusdb_docker(terminusdb_name string, demo_data_folder string) {
 }
 
 func stop_terminusdb_docker(terminusdb_name string) bool {
-	_, err := exec.Command("docker", "stop", terminusdb_name).Output()
+	_, err := exec.Command("docker", "stop", "-f", terminusdb_name).Output()
 	if err != nil {
 		fmt.Printf("Error stopping Docker container: %s\n", err)
 		return false

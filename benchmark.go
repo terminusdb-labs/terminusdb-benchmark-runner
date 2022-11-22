@@ -24,6 +24,8 @@ func cleanup(terminusdb_name string, terminusdb_dir string) {
 		fmt.Printf("Error deleting Docker image: %s\n", err)
 		return
 	}
+	// The sleep is needed to give time for cleanup
+	time.Sleep(5 * time.Second)
 }
 
 func clone_and_build_terminusdb(commit_hash string, terminusdb_name string, terminusdb_dir string) {

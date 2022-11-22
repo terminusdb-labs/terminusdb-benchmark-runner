@@ -153,6 +153,7 @@ func main() {
 		os.Exit(3)
 	}
 	clone_and_build_terminusdb(commit_hash, terminusdb_name, terminusdb_dir)
+	defer cleanup(terminusdb_name, terminusdb_dir)
 	switch benchmark_type {
 	case "k6":
 		execute_k6_benchmark(terminusdb_name, config)
@@ -165,5 +166,4 @@ func main() {
 		execute_k6_benchmark(terminusdb_name, config)
 		execute_lego_benchmark(terminusdb_name, config)
 	}
-	cleanup(terminusdb_name, terminusdb_dir)
 }

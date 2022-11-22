@@ -19,6 +19,8 @@ type BenchmarkConfig struct {
 func cleanup(terminusdb_name string, terminusdb_dir string) {
 	os.RemoveAll(terminusdb_dir)
 	// Remove docker image and cloned directories
+	exec.Command("docker", "stop", terminusdb_name).Output()
+	exec.Command("docker", "rm", terminusdb_name).Output()
 	_, err := exec.Command("docker", "rmi", "--force", terminusdb_name).Output()
 	if err != nil {
 		fmt.Printf("Error deleting Docker image: %s\n", err)
